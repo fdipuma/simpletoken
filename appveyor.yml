@@ -1,0 +1,15 @@
+version: 1.0.{branch}-{build}
+
+image: Visual Studio 2017
+
+branches:
+  only:
+    - master
+
+build_script:
+  - ps: .\build.ps1
+
+test: off
+
+artifacts:
+  - path: 'artifacts\*.nupkg'

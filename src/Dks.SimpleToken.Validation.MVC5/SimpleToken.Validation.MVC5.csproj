@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+    <AssemblyName>Dks.SimpleToken.Validation.MVC5</AssemblyName>
+    <RootNamespace>Dks.SimpleToken.Validation.MVC5</RootNamespace>
+    <Description>ASP.NET MVC 5 integration for Dks.SimpleToken.</Description>
+    <Authors>Federico Dipuma</Authors>
+    <PackageTags>token authorization mvc5</PackageTags>
+    <OutputType>Library</OutputType>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/fdipuma/simpletoken.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIconUrl>https://dl.dropboxusercontent.com/s/aer1vdnlykqmjdj/SimpleToken.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/fdipuma/simpletoken</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dks.SimpleToken.Core\SimpleToken.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.0.0" />
+  </ItemGroup>
+  
+</Project>

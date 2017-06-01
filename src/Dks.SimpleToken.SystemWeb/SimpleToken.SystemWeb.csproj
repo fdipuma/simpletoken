@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+    <AssemblyName>Dks.SimpleToken.SystemWeb</AssemblyName>
+    <RootNamespace>Dks.SimpleToken.SystemWeb</RootNamespace>
+    <Description>Token generation and protection for Dks.SimpleToken using classic System.Web utilities like MachineKey and FormsAuthenticationTicket.</Description>
+    <Authors>Federico Dipuma</Authors>
+    <PackageTags>token authorization</PackageTags>
+    <OutputType>Library</OutputType>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/fdipuma/simpletoken.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIconUrl>https://dl.dropboxusercontent.com/s/aer1vdnlykqmjdj/SimpleToken.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/fdipuma/simpletoken</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dks.SimpleToken.Core\SimpleToken.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  
+</Project>

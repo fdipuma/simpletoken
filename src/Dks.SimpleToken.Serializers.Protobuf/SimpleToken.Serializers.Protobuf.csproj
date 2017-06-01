@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
+    <AssemblyName>Dks.SimpleToken.Serializers.Protobuf</AssemblyName>
+    <RootNamespace>Dks.SimpleToken.Serializers</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Federico Dipuma</Authors>
+    <Company>Federico Dipuma</Company>
+    <Description>Protobuf-net serializer for Dks.SimpleToken</Description>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageId>Dks.SimpleToken.Serializers.Protobuf</PackageId>
+    <Product>Dks.SimpleToken.Serializers.Protobuf</Product>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/fdipuma/simpletoken</PackageProjectUrl>
+    <PackageIconUrl>https://dl.dropboxusercontent.com/s/aer1vdnlykqmjdj/SimpleToken.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/fdipuma/simpletoken.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>token authorization protobuf</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="protobuf-net" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dks.SimpleToken.Core\SimpleToken.Core.csproj" />
+  </ItemGroup>
+
+</Project>
