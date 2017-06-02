@@ -23,8 +23,6 @@ namespace Dks.SimpleToken.Validation.WebAPI
             if (encryptionConfig == null) throw new ArgumentNullException(nameof(encryptionConfig));
             if (encryptionConfig.EncryptionKey == null) throw new InvalidOperationException("The EncryptionKey cannot be null");
 
-            encryptionConfig.Validate(); // this throws CryptographicException when invalid
-
             var defaultProvider = DefaultSecureTokenProvider.Create(encryptionConfig);
 
             config.Properties.TryAdd(typeof(ISecureTokenProvider), defaultProvider);

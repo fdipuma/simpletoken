@@ -36,8 +36,6 @@ namespace Dks.SimpleToken.Protectors
         /// <param name="cryptoContainer">The crypto container to configure.</param>
         private void ConfigureCryptoContainer(SymmetricAlgorithm cryptoContainer)
         {
-            Configuration.Validate();
-            
             cryptoContainer.Mode = Configuration.CipherMode;
             cryptoContainer.Padding = Configuration.Padding;
             cryptoContainer.KeySize = Configuration.KeySize;

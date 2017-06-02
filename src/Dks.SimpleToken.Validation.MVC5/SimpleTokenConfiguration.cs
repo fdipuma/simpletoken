@@ -59,8 +59,6 @@ namespace Dks.SimpleToken.Validation.MVC5
         {
             if (encryptionConfiguration == null) throw new ArgumentNullException(nameof(encryptionConfiguration));
 
-            encryptionConfiguration.Validate();
-
             var provider = DefaultSecureTokenProvider.Create(encryptionConfiguration);
             ConfigureFilter(provider, options);
         }

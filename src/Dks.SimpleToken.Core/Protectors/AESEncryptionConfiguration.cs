@@ -4,17 +4,32 @@ using System.Security.Cryptography;
 
 namespace Dks.SimpleToken.Protectors
 {
-    public class AESEncryptionConfiguration
+    public sealed class AESEncryptionConfiguration
     {
-        public AESEncryptionConfiguration()
+        /// <summary>
+        /// Creates a new AES configuration
+        /// </summary>
+        /// <param name="key">The encryption key encoded in Base64. Its size must match <see cref="KeySize"/></param>
+        /// <param name="keySize">The seize in bits of the key provided. Default 256 bits.</param>
+        /// <param name="cipherMode">The cipher mode to use. Default is CBC mode.</param>
+        /// <param name="padding">The padding mode to use. Default is PKCS7</param>
+        /// <exception cref="ArgumentException">Encryption key is null or whitespace</exception>
+        /// <exception cref="CryptographicException"><seealso cref="EncryptionKey"/> size does not match provided <seealso cref="KeySize"/></exception>
+        public AESEncryptionConfiguration(string key, int keySize = 256, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7)
         {
-            CipherMode = CipherMode.CBC;
-            Padding = PaddingMode.PKCS7;
-            KeySize = 256;
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Encryption key cannot be null or whitespace", nameof(key));
+
+            EncryptionKey = key;
+            KeySize = keySize;
+            CipherMode = cipherMode;
+            Padding = padding;
+
+            Validate();
         }
 
         /// <summary>
-        /// Gets or sets the encryption key.
+        /// Gets the encryption key.
         /// </summary>
         /// <remarks>
         /// The length of the key needs to be the same as the value defined within the keySize configuration
@@ -22,45 +37,39 @@ namespace Dks.SimpleToken.Protectors
         /// <value>
         /// The encryption key.
         /// </value>
-        public string EncryptionKey { get; set; }
+        public string EncryptionKey { get; }
 
         /// <summary>
-        /// Gets or sets the size of the key in bits. Defaults to 256;
+        /// Gets the size of the key in bits. Defaults to 256;
         /// </summary>
         /// <value>
         /// The size of the key in bits.
         /// </value>
-        public int KeySize { get; set; }
+        public int KeySize { get; }
 
         /// <summary>
-        /// Gets or sets the cipher mode. Defaults to CBC.
+        /// Gets the cipher mode. Defaults to CBC.
         /// </summary>
         /// <value>
         /// The cipher mode.
         /// </value>
-        public CipherMode CipherMode { get; set; }
+        public CipherMode CipherMode { get; }
 
         /// <summary>
-        /// Gets or sets the padding mode. Defaults to PKCS7.
+        /// Gets the padding mode. Defaults to PKCS7.
         /// </summary>
         /// <value>
         /// The padding mode.
         /// </value>
-        public PaddingMode Padding { get; set; }
+        public PaddingMode Padding { get; }
 
         /// <summary>
         /// Validates the configuration and throws an <seealso cref="CryptographicException"/> if
         /// invalid
         /// </summary>
-        /// <exception cref="CryptographicException"><seealso cref="EncryptionKey"/> is missing or its size does not 
-        /// match with <seealso cref="KeySize"/></exception>
-        public void Validate()
+        /// <exception cref="CryptographicException"><seealso cref="EncryptionKey"/> size does not match with <seealso cref="KeySize"/></exception>
+        private void Validate()
         {
-            if (string.IsNullOrWhiteSpace(EncryptionKey))
-            {
-                throw new CryptographicException("Encryption key is missing.");
-            }
-
             using (var aes = Aes.Create())
             {
                 if (!aes.LegalKeySizes.Any(x => x.MinSize <= KeySize && KeySize <= x.MaxSize))
@@ -71,7 +80,7 @@ namespace Dks.SimpleToken.Protectors
 
             var key = Convert.FromBase64String(EncryptionKey);
 
-            // Check that the key length is equal to config.KeySize / 8
+            // Check that the key length is equal to KeySize / 8
             // e.g. 256/8 == 32 bytes expected for the key
             if (key.Length != KeySize / 8)
             {
