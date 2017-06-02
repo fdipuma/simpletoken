@@ -23,8 +23,6 @@ namespace Dks.SimpleToken.Tests
             ISecureTokenProvider provider = GetAesProtobufTokenProvider();
             var saToken = provider.GenerateToken(new { Foo = 12, Bar = "test" });
 
-            Debug.WriteLine($"SATOKEN LENGTH: {saToken.Length}");
-
             var saData = provider.ValidateAndGetData(saToken);
 
             Assert.Equal("12", saData.Data["Foo"]);
@@ -36,8 +34,6 @@ namespace Dks.SimpleToken.Tests
         {
             ISecureTokenProvider provider = DefaultSecureTokenProvider.Create(GetAESConfig());
             var saToken = provider.GenerateToken(new { Foo = 12, Bar = "test" });
-
-            Debug.WriteLine($"DTOKEN LENGTH: {saToken.Length}");
 
             var saData = provider.ValidateAndGetData(saToken);
 
@@ -51,8 +47,6 @@ namespace Dks.SimpleToken.Tests
             ISecureTokenProvider provider = GetAesProtobufTokenProvider();
             var saToken = provider.GenerateToken(PayLoad);
 
-            Debug.WriteLine($"SATOKEN LENGTH: {saToken.Length}");
-
             var saData = provider.ValidateAndGetData(saToken);
 
             Assert.Equal("12", saData.Data["Foo"]);
@@ -64,8 +58,6 @@ namespace Dks.SimpleToken.Tests
         {
             ISecureTokenProvider provider = DefaultSecureTokenProvider.Create(GetAESConfig());
             var saToken = provider.GenerateToken(PayLoad);
-
-            Debug.WriteLine($"DTOKEN LENGTH: {saToken.Length}");
 
             var saData = provider.ValidateAndGetData(saToken);
 
@@ -103,10 +95,7 @@ namespace Dks.SimpleToken.Tests
 
         private static AESEncryptionConfiguration GetAESConfig()
         {
-            return new AESEncryptionConfiguration
-            {
-                EncryptionKey = "3q2+796tvu/erb7v3q2+796tvu/erb7v3q2+796tvu8="
-            };
+            return new AESEncryptionConfiguration("3q2+796tvu/erb7v3q2+796tvu/erb7v3q2+796tvu8=");
         }
 
         private static ISecureTokenProvider GetAesProtobufTokenProvider()
