@@ -11,6 +11,10 @@ PM> Install-Package Dks.SimpleToken.Core
 This library is targeting both .NET Standard 1.3 and .NET 4.5.  
 See the [.NET Standard Platform Support Matrix][1] for further details.
 
+### Documentation
+
+For full documentation and integration possibilities please consult the [project Wiki](https://github.com/fdipuma/simpletoken/wiki)
+
 ### Typical scenario:
 
 This library was primarily born to handle authorization and access-control of uncoupled services that reside on different machines.
