@@ -79,28 +79,9 @@ Task("RunCoreTests")
 	}
 });
 
-Task("RunFrameworkTests")
-	.Does(() => 
-{
-	var vsTestInstallationPath = VSWhereProducts("*", new VSWhereProductSettings { Requires = "Microsoft.VisualStudio.PackageGroup.TestTools.Core"}).FirstOrDefault();
-
-	var vsTestPath = (vsTestInstallationPath==null)
-							? null
-                            : vsTestInstallationPath.CombineWithFilePath("./Common7/IDE/CommonExtensions/Microsoft/TestWindow/vstest.console.exe");
-
-	var projects = GetFiles(frameworkTestProjects);
-
-	Information("Executing VSTest on assemblies:");
-	foreach(var p in projects)
-		Information(p.FullPath);
-
-	VSTest(projects, new VSTestSettings() { ToolPath = vsTestPath });
-});
-
 Task("RunTests")
 	.IsDependentOn("Build")
-	.IsDependentOn("RunCoreTests")
-    .IsDependentOn("RunFrameworkTests");
+	.IsDependentOn("RunCoreTests");
 
 Task("Package")
 	.IsDependentOn("Build")
