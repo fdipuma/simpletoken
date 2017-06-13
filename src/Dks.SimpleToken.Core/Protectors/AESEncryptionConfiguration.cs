@@ -6,6 +6,10 @@ namespace Dks.SimpleToken.Protectors
 {
     public sealed class AESEncryptionConfiguration
     {
+        public const int DefaultKeySize = 256;
+        public const CipherMode DefaultCipherMode = CipherMode.CBC;
+        public const PaddingMode DefaultPaddingMode = PaddingMode.PKCS7;
+
         /// <summary>
         /// Creates a new AES configuration
         /// </summary>
@@ -15,9 +19,9 @@ namespace Dks.SimpleToken.Protectors
         /// <param name="padding">The padding mode to use. Default is PKCS7</param>
         /// <exception cref="ArgumentException">Encryption key is null or whitespace</exception>
         /// <exception cref="CryptographicException"><seealso cref="EncryptionKey"/> size does not match provided <seealso cref="KeySize"/></exception>
-        public AESEncryptionConfiguration(string key, int keySize = 256, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7)
+        public AESEncryptionConfiguration(string key, int keySize = DefaultKeySize, CipherMode cipherMode = DefaultCipherMode, PaddingMode padding = DefaultPaddingMode)
         {
-            if (string.IsNullOrWhiteSpace(key))
+            if (String.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("Encryption key cannot be null or whitespace", nameof(key));
 
             EncryptionKey = key;
@@ -87,5 +91,14 @@ namespace Dks.SimpleToken.Protectors
                 throw new CryptographicException($"Encryption key has wrong length. Please ensure that it is *EXACTLY* {KeySize} bits long");
             }
         }
+
+        /// <summary>
+        /// Generates a new AES key with provided size and cipher mode
+        /// </summary>
+        /// <param name="keySize">The size of the key in bits (default <seealso cref="DefaultKeySize"/>)</param>
+        /// <param name="cipherMode">The cipher mode to use (default <seealso cref="DefaultCipherMode"/>)</param>
+        /// <returns>A base64 string representing the key to use</returns>
+        public static string GenerateNewKey(int keySize = DefaultKeySize, CipherMode cipherMode = DefaultCipherMode)
+            => AESMessageHandler.GenerateKey(keySize, cipherMode);
     }
 }

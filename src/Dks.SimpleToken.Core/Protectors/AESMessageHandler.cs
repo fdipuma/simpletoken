@@ -123,15 +123,15 @@ namespace Dks.SimpleToken.Protectors
                 return string.Empty;
             }
 
-            var primatives = cypherText.Split(new[] { CYPHER_TEXT_IV_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
+            var primitives = cypherText.Split(new[] { CYPHER_TEXT_IV_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (primatives.Length != 2)
+            if (primitives.Length != 2)
             {
                 throw new ArgumentException("Invalid cypherText. Unable to determine the correct IV used for the encryption. Please ensure the source string is in the format 'Cypher Text'" + CYPHER_TEXT_IV_SEPERATOR + "'IV'", "source");
             }
 
-            var cypherTextPrimitave = Convert.FromBase64String(primatives[0]);
-            var iv = Convert.FromBase64String(primatives[1]);
+            var cypherTextPrimitave = Convert.FromBase64String(primitives[0]);
+            var iv = Convert.FromBase64String(primitives[1]);
 
             return DecryptStringFromBytes(cypherTextPrimitave, iv);
         }
@@ -197,6 +197,19 @@ namespace Dks.SimpleToken.Protectors
             }
 
             return plaintext;
+        }
+
+        public static string GenerateKey(int keySize, CipherMode cipherMode)
+        {
+            using (var cryptoContainer = Aes.Create())
+            {
+                cryptoContainer.Mode = cipherMode;
+                cryptoContainer.KeySize = keySize;
+
+                cryptoContainer.GenerateKey();
+
+                return Convert.ToBase64String(cryptoContainer.Key);
+            }
         }
     }
 }
