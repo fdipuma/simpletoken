@@ -14,7 +14,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageIconUrl>https://dl.dropboxusercontent.com/s/aer1vdnlykqmjdj/SimpleToken.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/fdipuma/simpletoken</PackageProjectUrl>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
+    <FileVersion>1.1.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

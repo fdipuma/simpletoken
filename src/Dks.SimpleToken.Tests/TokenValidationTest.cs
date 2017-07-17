@@ -66,6 +66,18 @@ namespace Dks.SimpleToken.Tests
         }
 
         [Fact]
+        public void ShouldCorrectlySerializeWithoutExpiration_Default()
+        {
+            ISecureTokenProvider provider = DefaultSecureTokenProvider.Create(GetAESConfig());
+            var saToken = provider.GenerateToken(PayLoad, ttl: null);
+
+            var saData = provider.ValidateAndGetData(saToken);
+
+            Assert.Equal("12", saData.Data["Foo"]);
+            Assert.Equal("test", saData.Data["Bar"]);
+        }
+
+        [Fact]
         public void ShouldDetectExpired_AesProtobuf()
         {
             var provider = GetAesProtobufTokenProvider();

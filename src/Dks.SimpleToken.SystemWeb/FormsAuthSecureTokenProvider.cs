@@ -34,7 +34,7 @@ namespace Dks.SimpleToken.Providers
         }
 
         /// <inheritdoc />
-        public string GenerateToken(IDictionary<string, string> data, int ttl = 60)
+        public string GenerateToken(IDictionary<string, string> data, int? ttl = 60)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
             if (ttl <= 0) throw new ArgumentOutOfRangeException(nameof(ttl));
@@ -49,19 +49,20 @@ namespace Dks.SimpleToken.Providers
             return Generate(TicketName, kvps.ToString(), ttl);
         }
 
-        private static string Generate(string ticketName, string serializedData, int ttl = 60)
+        private static string Generate(string ticketName, string serializedData, int? ttl = 60)
         {
             if (ticketName == null) throw new ArgumentNullException(nameof(ticketName));
             if (serializedData == null) throw new ArgumentNullException(nameof(serializedData));
             if (ttl <= 0) throw new ArgumentOutOfRangeException(nameof(ttl));
 
             var utcNow = DateTime.UtcNow;
+            var expire = ttl.HasValue ? utcNow.AddSeconds(ttl.Value) : DateTime.MaxValue;
 
             var formsTicket = new FormsAuthenticationTicket(
                 1, // version
                 ticketName, // ticket name
                 utcNow, // issue date
-                utcNow.AddSeconds(ttl), // expiration date
+                expire, // expiration date
                 true, // is persistent
                 serializedData // user additional data
                 );

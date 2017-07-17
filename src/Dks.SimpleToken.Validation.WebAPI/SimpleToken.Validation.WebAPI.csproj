@@ -8,9 +8,9 @@
     <Authors>Federico Dipuma</Authors>
     <Company>Federico Dipuma</Company>
     <Description>ASP.NET Web Api 2 integration for Dks.SimpleToken</Description>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
+    <FileVersion>1.1.1.0</FileVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/fdipuma/simpletoken</PackageProjectUrl>
     <PackageIconUrl>https://dl.dropboxusercontent.com/s/aer1vdnlykqmjdj/SimpleToken.png</PackageIconUrl>

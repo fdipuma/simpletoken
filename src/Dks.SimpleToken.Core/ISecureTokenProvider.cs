@@ -14,7 +14,7 @@ namespace Dks.SimpleToken.Core
         /// <param name="data">Additional data to attach</param>
         /// <param name="ttl">Time To Live (before expiration) in seconds</param>
         /// <returns>An encrypted string representing the token</returns>
-        string GenerateToken(IDictionary<string, string> data, int ttl = 60);
+        string GenerateToken(IDictionary<string, string> data, int? ttl = 60);
 
         /// <summary>
         /// Validates a token and deserializes its data inside a SecureToken object

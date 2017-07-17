@@ -20,14 +20,16 @@ namespace Dks.SimpleToken.Core
             _secureTokenProtector = secureTokenProtector;
         }
 
-        public virtual string GenerateToken(IDictionary<string, string> data, int ttl = 60)
+        public virtual string GenerateToken(IDictionary<string, string> data, int? ttl = 60)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
             if (ttl <= 0) throw new ArgumentOutOfRangeException(nameof(ttl));
 
             var now = DateTimeOffset.UtcNow;
 
-            var token = SecureToken.Create(now, now.AddSeconds(ttl), data);
+            var expire = ttl.HasValue ? now.AddSeconds(ttl.Value) : DateTimeOffset.MaxValue;
+
+            var token = SecureToken.Create(now, expire, data);
 
             var serialized = _serializer.SerializeToken(token);
 

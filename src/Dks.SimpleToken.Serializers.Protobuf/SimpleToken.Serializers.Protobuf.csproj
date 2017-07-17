@@ -8,9 +8,9 @@
     <Authors>Federico Dipuma</Authors>
     <Company>Federico Dipuma</Company>
     <Description>Protobuf-net serializer for Dks.SimpleToken</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <FileVersion>1.0.1.0</FileVersion>
     <PackageId>Dks.SimpleToken.Serializers.Protobuf</PackageId>
     <Product>Dks.SimpleToken.Serializers.Protobuf</Product>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
