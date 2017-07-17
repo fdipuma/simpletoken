@@ -20,13 +20,13 @@ namespace Dks.SimpleToken.Tests
 
             var bytes = Convert.FromBase64String(key);
 
-            var realKeySize = bytes.Length/ 8;
+            Assert.Equal(keySize/8, bytes.Length);
 
-            Assert.Equal(keySize/8, realKeySize);
+            var realKeySize = bytes.Length * 8;
 
             using (var aes = Aes.Create())
             {
-                Assert.False(aes.LegalKeySizes.Any(x => x.MinSize <= realKeySize && realKeySize <= x.MaxSize));
+                Assert.True(aes.LegalKeySizes.Any(x => x.MinSize <= realKeySize && realKeySize <= x.MaxSize));
             }
         }
     }
