@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
@@ -13,8 +13,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageIconUrl>https://dl.dropboxusercontent.com/s/aer1vdnlykqmjdj/SimpleToken.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/fdipuma/simpletoken</PackageProjectUrl>
-    <Version>1.1.1</Version>
-    <FileVersion>1.1.1.0</FileVersion>
+    <Version>1.1.2</Version>
+    <FileVersion>1.1.2.0</FileVersion>
   </PropertyGroup>
 
 </Project>

@@ -15,14 +15,14 @@ namespace Dks.SimpleToken.Core
         /// <param name="data">Additional data to attach</param>
         /// <param name="ttl">Time To Live (before expiration) in seconds</param>
         /// <returns>An encrypted string representing the token</returns>
-        public static string GenerateToken<T>(this ISecureTokenProvider provider, T data, int? ttl = null) where T : class
+        public static string GenerateToken<T>(this ISecureTokenProvider provider, T data, int? ttl = 60) where T : class
         {
             if (provider == null) throw new ArgumentNullException(nameof(provider));
             if (data == null) throw new ArgumentNullException(nameof(data));
 
             var dictData = ObjectToDictionary(data);
 
-            return ttl.HasValue ? provider.GenerateToken(dictData, ttl.Value) : provider.GenerateToken(dictData);
+            return provider.GenerateToken(dictData, ttl);
         }
 
         /// <summary>
